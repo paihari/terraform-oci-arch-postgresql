@@ -8,8 +8,8 @@ resource "random_id" "tag" {
 resource "oci_identity_tag_namespace" "ArchitectureCenterTagNamespace" {
   provider       = oci.homeregion
   compartment_id = var.compartment_ocid
-  description    = "ArchitectureCenterTagNamespace"
-  name           = "ArchitectureCenter\\deploy-postgresql-db-${random_id.tag.hex}"
+  description    = "WindmillTagNamespace"
+  name           = "Windmill-${random_id.tag.hex}\\postgresql-db-${random_id.tag.hex}"
 
   provisioner "local-exec" {
     command = "sleep 10"

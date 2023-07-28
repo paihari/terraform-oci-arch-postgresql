@@ -10,8 +10,8 @@ variable "compartment_ocid" {}
 variable "availability_domain_name" {}
 
 variable "release" {
-  description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.6.1"
+  description = "Windmill Post Gres Architecture Release (OCI Architecture Center)"
+  default     = "1.0.0"
 }
 
 variable "use_existing_vcn" {
