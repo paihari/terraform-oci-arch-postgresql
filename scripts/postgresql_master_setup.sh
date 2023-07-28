@@ -43,10 +43,13 @@ if [[ $add_iscsi_volume == "true" ]]; then
     echo '--> Update the content of pg_hba.conf file to include standby host for replication...'
     sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_hotstandby_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
     sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_master_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
-    
+	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${node_vcn_cidr} md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
+
 	sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
     sudo -u root bash -c "echo 'host all all ${pg_master_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
     sudo -u root bash -c "echo 'host all all ${node_subnet_cidr} md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
+	sudo -u root bash -c "echo 'host all all ${node_vcn_cidr} md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
+
     
 	export pg_whitelisted_ip='${pg_whitelisted_ip}'
 	if [[ $pg_whitelisted_ip != "" ]]; then 
@@ -73,10 +76,12 @@ else
     echo '--> Update the content of pg_hba.conf file to include standby host for replication...'
 	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_hotstandby_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_master_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
+	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${node_vcn_cidr} md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	
 	sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	sudo -u root bash -c "echo 'host all all ${pg_master_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	sudo -u root bash -c "echo 'host all all ${node_subnet_cidr} md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
+	sudo -u root bash -c "echo 'host all all ${node_vcn_cidr} md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	
 	export pg_whitelisted_ip='${pg_whitelisted_ip}'
 	if [[ $pg_whitelisted_ip != "" ]]; then 
@@ -91,6 +96,9 @@ sudo systemctl stop postgresql-${pg_version}
 sudo systemctl start postgresql-${pg_version}
 sudo systemctl status postgresql-${pg_version} --no-pager
 echo '-[100%]-> PostgreSQL service restarted.'
+
+echo '--> Firewalld disabled since communication within VCN...'
+sudo systemctl stop firewalld
 
 echo '#################################################'
 echo 'PostgreSQL Master setup for HotStandby1 finished.'

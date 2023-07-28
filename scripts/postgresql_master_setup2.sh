@@ -17,13 +17,21 @@ echo '-[100%]-> Firewall updated with hotstandby2 IP (${pg_hotstandby_ip}) on ma
 if [[ $add_iscsi_volume == "true" ]]; then 
 	echo '--> Updating the content of pg_hba.conf file to include standby host for replication...'
 	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_hotstandby_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
+	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${node_vcn_cidr} md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
+
 	sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
+	sudo -u root bash -c "echo 'host all all ${node_vcn_cidr} md5' | sudo tee -a /data/pgsql/pg_hba.conf"
+
 	sudo -u root bash -c "chown postgres /data/pgsql/pg_hba.conf" 
     echo '-[100%]-> File pg_hba.conf updated with standby host data for replication.' 	
 else
 	echo '--> Updating the content of pg_hba.conf file to include standby host for replication...'
 	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_hotstandby_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
-	sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
+	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${node_vcn_cidr} md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
+	
+	sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf"
+	sudo -u root bash -c "echo 'host all all ${node_vcn_cidr} md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
+	
 	sudo -u root bash -c "chown postgres /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
     echo '-[100%]-> File pg_hba.conf updated with standby host data for replication.' 	
 fi
@@ -33,6 +41,11 @@ sudo systemctl stop postgresql-${pg_version}
 sudo systemctl start postgresql-${pg_version}
 sudo systemctl status postgresql-${pg_version} --no-pager
 echo '-[100%]-> PostgreSQL service restarted.'
+
+echo '--> Firewalld disabled since communication within VCN...'
+sudo systemctl stop firewalld
+
+
 
 echo '#################################################'
 echo 'PostgreSQL Master setup for HotStandby2 finished.'

@@ -44,6 +44,7 @@ data "template_file" "postgresql_master_setup_sh" {
     pg_version           = var.postgresql_version
     pg_replicat_username = var.postgresql_replicat_username
     node_subnet_cidr     = var.postgresql_subnet_cidr
+    node_vcn_cidr        = var.postgresql_vcn_cidr
     add_iscsi_volume     = var.add_iscsi_volume
     pg_whitelisted_ip    = var.pg_whitelisted_ip
   }
@@ -54,6 +55,7 @@ data "template_file" "postgresql_master_setup2_sh" {
   template = file("${path.module}/scripts/postgresql_master_setup2.sh")
 
   vars = {
+    node_subnet_cidr     = var.postgresql_subnet_cidr
     pg_master_ip         = data.oci_core_vnic.postgresql_master_primaryvnic.private_ip_address
     pg_hotstandby_ip     = element(data.oci_core_vnic.postgresql_hotstandby2_primaryvnic.*.private_ip_address, 0)
     pg_version           = var.postgresql_version
