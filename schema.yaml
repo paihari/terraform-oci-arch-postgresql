@@ -171,6 +171,7 @@
         description: "Choose PostgreSQL Version."
         default: "13"
         enum:
+          - "14"
           - "13"  
           - "12"
           - "11"

@@ -43,10 +43,12 @@ if [[ $add_iscsi_volume == "true" ]]; then
     echo '--> Update the content of pg_hba.conf file to include standby host for replication...'
     sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_hotstandby_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
     sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_master_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
-    sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
+    
+	sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
     sudo -u root bash -c "echo 'host all all ${pg_master_ip}/32 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
     sudo -u root bash -c "echo 'host all all ${node_subnet_cidr} md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
-    export pg_whitelisted_ip='${pg_whitelisted_ip}'
+    
+	export pg_whitelisted_ip='${pg_whitelisted_ip}'
 	if [[ $pg_whitelisted_ip != "" ]]; then 
     	sudo -u root bash -c "echo 'host all all ${pg_whitelisted_ip}/0 md5' | sudo tee -a /data/pgsql/pg_hba.conf" 
     fi
@@ -71,9 +73,11 @@ else
     echo '--> Update the content of pg_hba.conf file to include standby host for replication...'
 	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_hotstandby_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	sudo -u root bash -c "echo 'host replication ${pg_replicat_username} ${pg_master_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
+	
 	sudo -u root bash -c "echo 'host all all ${pg_hotstandby_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	sudo -u root bash -c "echo 'host all all ${pg_master_ip}/32 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
 	sudo -u root bash -c "echo 'host all all ${node_subnet_cidr} md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 
+	
 	export pg_whitelisted_ip='${pg_whitelisted_ip}'
 	if [[ $pg_whitelisted_ip != "" ]]; then 
     	sudo -u root bash -c "echo 'host all all ${pg_whitelisted_ip}/0 md5' | sudo tee -a /var/lib/pgsql/${pg_version}/data/pg_hba.conf" 

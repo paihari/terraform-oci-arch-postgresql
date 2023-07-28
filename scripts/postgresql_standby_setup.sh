@@ -31,7 +31,13 @@ if [[ $add_iscsi_volume == "true" ]]; then
 	echo '-[100%]-> Initial backup of database taken.'
 
 	echo '--> Updating content of recovery.conf/postgresql.conf files...'
-	if [[ $pg_version == "13" ]]; then 
+	if [[ $pg_version == "14" ]]; then 
+		touch /data/pgsql/standby.signal
+		touch /data/pgsql/recovery.signal
+		sudo -u root bash -c "echo 'primary_conninfo  = '\''host=${pg_master_ip} port=5432 user=${pg_replicat_username} password=${pg_replicat_password}'\'' ' | sudo tee -a /data/pgsql/postgresql.conf"
+    	sudo -u root bash -c "echo 'recovery_target_timeline = '\''latest'\'' ' | sudo tee -a /data/pgsql/postgresql.conf"
+    	sudo -u root bash -c "chown postgres /data/pgsql/postgresql.conf"
+	elif [[ $pg_version == "13" ]]; then 
 		touch /data/pgsql/standby.signal
 		touch /data/pgsql/recovery.signal
 		sudo -u root bash -c "echo 'primary_conninfo  = '\''host=${pg_master_ip} port=5432 user=${pg_replicat_username} password=${pg_replicat_password}'\'' ' | sudo tee -a /data/pgsql/postgresql.conf"
@@ -58,6 +64,12 @@ else
 
 	echo '--> Updating content of recovery.conf/postgresql.conf files...'
 	if [[ $pg_version == "13" ]]; then 
+		touch /var/lib/pgsql/${pg_version}/data/standby.signal
+		touch /var/lib/pgsql/${pg_version}/data/recovery.signal
+		sudo -u root bash -c "echo 'primary_conninfo  = '\''host=${pg_master_ip} port=5432 user=${pg_replicat_username} password=${pg_replicat_password}'\'' ' | sudo tee -a /var/lib/pgsql/${pg_version}/data/postgresql.conf"
+    	sudo -u root bash -c "echo 'recovery_target_timeline = '\''latest'\'' ' | sudo tee -a /var/lib/pgsql/${pg_version}/data/postgresql.conf"
+    	sudo -u root bash -c "chown postgres /var/lib/pgsql/${pg_version}/data/postgresql.conf"
+	elif [[ $pg_version == "13" ]]; then 
 		touch /var/lib/pgsql/${pg_version}/data/standby.signal
 		touch /var/lib/pgsql/${pg_version}/data/recovery.signal
 		sudo -u root bash -c "echo 'primary_conninfo  = '\''host=${pg_master_ip} port=5432 user=${pg_replicat_username} password=${pg_replicat_password}'\'' ' | sudo tee -a /var/lib/pgsql/${pg_version}/data/postgresql.conf"
