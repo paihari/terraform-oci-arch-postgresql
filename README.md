@@ -1,4 +1,4 @@
-# terraform-oci-arch-postgresql
+# terraform-oci-arch-postgresql-for-windmill
 
 PostgreSQL is an open source object-relational database management system. It’s highly extensible, highly scalable, and has many features. PostgreSQL supports data replication across multiple data centers.
 

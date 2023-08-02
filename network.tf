@@ -5,7 +5,7 @@ resource "oci_core_virtual_network" "postgresql_vcn" {
   count          = !var.use_existing_vcn ? 1 : 0
   cidr_block     = var.postgresql_vcn_cidr
   compartment_id = var.compartment_ocid
-  display_name   = "PostgreSQLVCN"
+  display_name   = "ApplicationPostgreSQLVCN"
   dns_label      = "postgresvcn"
   defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
