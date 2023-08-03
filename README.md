@@ -1,4 +1,8 @@
-# terraform-oci-arch-postgresql-for-windmill
+# Terraform-oci-arch-postgresql-for-windmill
+
+The base image is customized to host the windmill application with needed database schema, extensions, users.
+Postgresql : 14
+OCI Linux 8
 
 PostgreSQL is an open source object-relational database management system. It’s highly extensible, highly scalable, and has many features. PostgreSQL supports data replication across multiple data centers.
 
