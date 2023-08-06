@@ -5,30 +5,30 @@ resource "random_id" "tag" {
   byte_length = 2
 }
 
-resource "oci_identity_tag_namespace" "ArchitectureCenterTagNamespace" {
-  provider       = oci.homeregion
-  compartment_id = var.compartment_ocid
-  description    = "WindmillTagNamespace"
-  name           = "Windmill-${random_id.tag.hex}\\postgresql-db-${random_id.tag.hex}"
+# resource "oci_identity_tag_namespace" "ArchitectureCenterTagNamespace" {
+#   provider       = oci.homeregion
+#   compartment_id = var.compartment_ocid
+#   description    = "WindmillTagNamespace"
+#   name           = "Windmill-${random_id.tag.hex}\\postgresql-db-${random_id.tag.hex}"
 
-  provisioner "local-exec" {
-    command = "sleep 10"
-  }
+#   provisioner "local-exec" {
+#     command = "sleep 10"
+#   }
 
-}
+# }
 
-resource "oci_identity_tag" "ArchitectureCenterTag" {
-  provider         = oci.homeregion
-  description      = "ArchitectureCenterTag"
-  name             = "release"
-  tag_namespace_id = oci_identity_tag_namespace.ArchitectureCenterTagNamespace.id
+# resource "oci_identity_tag" "ArchitectureCenterTag" {
+#   provider         = oci.homeregion
+#   description      = "ArchitectureCenterTag"
+#   name             = "release"
+#   tag_namespace_id = oci_identity_tag_namespace.ArchitectureCenterTagNamespace.id
 
-  validator {
-    validator_type = "ENUM"
-    values         = ["release", "${var.release}"]
-  }
+#   validator {
+#     validator_type = "ENUM"
+#     values         = ["release", "${var.release}"]
+#   }
 
-  provisioner "local-exec" {
-    command = "sleep 120"
-  }
-}
+#   provisioner "local-exec" {
+#     command = "sleep 120"
+#   }
+# }

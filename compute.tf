@@ -69,7 +69,7 @@ resource "oci_core_instance" "postgresql_master" {
     command = "sleep 240"
   }
 
-  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  # defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_core_boot_volume_backup" "postgresql_master_boot_volume_backup" {
@@ -137,7 +137,7 @@ resource "oci_core_instance" "postgresql_hotstandby1" {
     command = "sleep 240"
   }
 
-  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  # defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_core_boot_volume_backup" "postgresql_hotstandby1_boot_volume_backup" {
@@ -205,7 +205,7 @@ resource "oci_core_instance" "postgresql_hotstandby2" {
     command = "sleep 240"
   }
 
-  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  # defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_core_boot_volume_backup" "postgresql_hotstandby2_boot_volume_backup" {

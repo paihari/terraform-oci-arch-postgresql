@@ -7,7 +7,7 @@ resource "oci_core_volume" "postgresql_master_volume" {
   compartment_id      = var.compartment_ocid
   display_name        = "PostgreSQL_Master_Volume"
   size_in_gbs         = var.iscsi_volume_size_in_gbs
-  defined_tags        = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  # defined_tags        = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_core_volume_attachment" "postgresql_master_volume_attachment" {
@@ -36,7 +36,7 @@ resource "oci_core_volume" "postgresql_hotstandby1_volume" {
   compartment_id      = var.compartment_ocid
   display_name        = "PostgreSQL_HotStandby1_Volume"
   size_in_gbs         = var.iscsi_volume_size_in_gbs
-  defined_tags        = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  # defined_tags        = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_core_volume_attachment" "postgresql_hotstandby1_volume_attachment" {
@@ -65,7 +65,7 @@ resource "oci_core_volume" "postgresql_hotstandby2_volume" {
   compartment_id      = var.compartment_ocid
   display_name        = "PostgreSQL_HotStandby2_Volume"
   size_in_gbs         = var.iscsi_volume_size_in_gbs
-  defined_tags        = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  # defined_tags        = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_core_volume_attachment" "postgresql_hotstandby2_volume_attachment" {

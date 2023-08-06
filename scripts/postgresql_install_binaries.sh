@@ -40,6 +40,19 @@ then
 fi
 echo '-[100%]-> Install PostgreSQL Server (postgresql${pg_version_no_dot}-server) installed.'
 
+
+echo '--> Install postgresql14-contrib...'
+if [[ $(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/') == "el7" ]]
+then 
+    sudo yum install -y postgresql14-contrib
+fi
+if [[ $(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/') == "el8" ]]
+then 
+    sudo dnf install -y postgresql14-contrib
+fi
+echo '-[100%]-> Install postgresql14-contrib installed.'
+
+
 echo '--> Install PostgreSQL pg_basebackup utility...'
 if [[ $(uname -r | sed 's/^.*\(el[0-9]\+\).*$/\1/') == "el7" ]]
 then 
