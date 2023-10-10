@@ -1,5 +1,5 @@
 # Terraform-oci-arch-postgresql-for-windmill
-v0.3
+v0.4
 
 The base image is customized to host the windmill application with needed database schema, extensions, users.
 Postgresql : 14
