@@ -15,7 +15,7 @@
       - region
       - release
       - use_existing_vcn
-      - postgresql_vcn
+      - windmill_vcn
       - postgresql_subnet
       
     - title: Required Configuration  
@@ -35,7 +35,7 @@
             - show_advanced
       variables:
       - pg_whitelisted_ip 
-      - postgresql_vcn_cidr
+      - windmill_vcn_cidr
       - postgresql_subnet_cidr
       - create_drg_for_private_subnet
 
@@ -169,7 +169,7 @@
         required: true
         title: "PostgreSQL Version"
         description: "Choose PostgreSQL Version."
-        default: "13"
+        default: "14"
         enum:
           - "14"
           - "13"  
@@ -270,7 +270,7 @@
         default: true
 
 
-      postgresql_vcn_cidr:
+      windmill_vcn_cidr:
         type: string
         visible: true
         required: false

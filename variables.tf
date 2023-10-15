@@ -23,7 +23,7 @@ variable "pg_whitelisted_ip" {
   default     = ""
 }
 
-variable "postgresql_vcn" {
+variable "windmill_vcn" {
   default = ""
 }
 
@@ -47,7 +47,7 @@ variable "ssh_public_key" {
   default = ""
 }
 
-variable "postgresql_vcn_cidr" {
+variable "windmill_vcn_cidr" {
   default = "10.1.0.0/16"
 }
 

@@ -114,7 +114,7 @@ module "arch-postgresql" {
   compartment_ocid              = "<compartment_ocid>"
   use_existing_vcn              = true # You can inject your own VCN and subnet 
   create_in_private_subnet      = true # Subnet should be associated with NATGW and proper Route Table.
-  postgresql_vcn                = oci_core_virtual_network.my_vcn.id # Injected VCN
+  windmill_vcn                = oci_core_virtual_network.my_vcn.id # Injected VCN
   postgresql_subnet             = oci_core_subnet.my_private_subnet.id # Injected Private Subnet
   postgresql_password           = "<password>"
   postgresql_deploy_hotstandby1 = true # if we want to setup hotstandby1

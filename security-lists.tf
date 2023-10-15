@@ -4,7 +4,7 @@
 resource "oci_core_security_list" "postgresql_securitylist" {
   count          = !var.use_existing_vcn ? 1 : 0
   compartment_id = var.compartment_ocid
-  vcn_id         = oci_core_virtual_network.postgresql_vcn[0].id
+  vcn_id         = oci_core_virtual_network.windmill_vcn[0].id
   display_name   = "PostgreSQLSecurityList"
 
   egress_security_rules {
@@ -24,12 +24,12 @@ resource "oci_core_security_list" "postgresql_securitylist" {
 
   ingress_security_rules {
     protocol = "6"
-    source   = "0.0.0.0/0"
+    source   = var.windmill_vcn_cidr
 
     tcp_options {
       max = "5432"
       min = "5432"
     }
   }
-  # defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  
 }

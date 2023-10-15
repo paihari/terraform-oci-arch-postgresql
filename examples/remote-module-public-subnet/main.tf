@@ -145,7 +145,7 @@ module "arch-postgresql" {
   postgresql_hotstandby2_flex_shape_memory = var.postgresql_hotstandby2_flex_shape_memory
   use_existing_vcn                         = true                               # usage of the external existing VCN
   create_in_private_subnet                 = false                              # usage of the public subnet
-  postgresql_vcn                           = oci_core_virtual_network.my_vcn.id # injecting myVCN
+  windmill_vcn                           = oci_core_virtual_network.my_vcn.id # injecting myVCN
   postgresql_subnet                        = oci_core_subnet.my_subnet.id       # injecting public mySubnet 
   postgresql_password                      = var.postgresql_password
   postgresql_deploy_hotstandby1            = true

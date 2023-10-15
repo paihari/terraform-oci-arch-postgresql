@@ -97,7 +97,7 @@ module "arch-postgresql" {
   compartment_ocid         = var.compartment_ocid
   use_existing_vcn         = true                               # usage of the external existing VCN
   create_in_private_subnet = true                               # usage of the private subnet
-  postgresql_vcn           = oci_core_virtual_network.my_vcn.id # injecting myVCN
+  windmill_vcn           = oci_core_virtual_network.my_vcn.id # injecting myVCN
   postgresql_subnet        = oci_core_subnet.my_subnet.id       # injecting private mySubnet 
   postgresql_password      = var.postgresql_password
   add_iscsi_volume         = true # adding iSCSI volume...
