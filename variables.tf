@@ -90,7 +90,7 @@ variable "postgresql_password" {
 }
 
 variable "postgresql_version" {
-  default = "13"
+  default = "14"
 }
 
 variable "add_iscsi_volume" {
