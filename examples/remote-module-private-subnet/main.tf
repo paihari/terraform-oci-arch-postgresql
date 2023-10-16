@@ -148,3 +148,8 @@ output "postgresql_hotstandby2_private_ip" {
 output "bastion_ssh_postgresql_hotstandby2_session_metadata" {
   value = module.arch-postgresql.bastion_ssh_postgresql_hotstandby2_session_metadata
 }
+
+output "bastion_ssh_postgresql_hotstandby2_session_metadata" {
+  value = module.arch-postgresql.bastion_ssh_postgresql_hotstandby2_session_metadata
+}
+
